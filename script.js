@@ -130,11 +130,11 @@ document.addEventListener('click', (e) => {
   if (fallers > 25) return;
   fallers++;
   const c = document.createElement('img');
-  c.src = 'assets/logo.jpg';
+  c.src = 'assets/cat-cutout.png';
   c.alt = '';
   c.className = 'faller';
-  c.style.left = (e.clientX - 45) + 'px';
-  c.style.top = '-100px';
+  c.style.left = (e.clientX - 75) + 'px';
+  c.style.top = '-160px';
   c.style.setProperty('--fall', (innerHeight + 10) + 'px');
   c.style.setProperty('--spin', (Math.random() * 120 - 60) + 'deg');
   document.body.appendChild(c);

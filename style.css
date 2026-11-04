@@ -306,12 +306,10 @@ button { font: inherit; cursor: pointer; }
 .faller {
   position: fixed;
   z-index: 90;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 4px solid var(--white);
-  object-fit: cover;
-  object-position: 50% 15%;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .5));
   pointer-events: none;
   animation: fall .8s cubic-bezier(.55, 0, 1, .45) forwards;
 }
