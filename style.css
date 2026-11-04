@@ -193,12 +193,13 @@ button { font: inherit; cursor: pointer; }
 
 /* ---------- video ---------- */
 .vid-sec { padding: 40px 16px 90px; }
-.meme { position: relative; overflow: hidden; background: #000; }
-.meme-video { width: min(100%, 440px); margin: 0 auto; aspect-ratio: 9 / 16; border: 6px solid var(--white); transform: rotate(-1.5deg); }
-.meme-video video { width: 100%; height: 100%; object-fit: cover; }
-.cap { position: absolute; left: 0; right: 0; margin: 0; padding: 0 12px; text-align: center; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.02; pointer-events: none; }
-.cap-top { top: 12px; }
-.cap-bot { bottom: 64px; }
+/* captions sit on black bars above and below the picture, never on his face */
+.meme, .lb-inner { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #000; }
+.meme-video { width: min(100%, 440px); margin: 0 auto; border: 6px solid var(--white); transform: rotate(-1.5deg); }
+.vid-frame { position: relative; aspect-ratio: 9 / 16; }
+.vid-frame video { width: 100%; height: 100%; object-fit: cover; }
+.cap { margin: 0; padding: 10px 12px; text-align: center; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.02; pointer-events: none; }
+.cap-top { order: -1; }
 .sound { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); padding: 6px 16px; border: 3px solid #000; background: var(--yellow); color: #000; font-family: var(--meme); font-size: 18px; }
 .vid-credit { text-align: center; font-size: 14px; opacity: .6; }
 
@@ -250,14 +251,13 @@ button { font: inherit; cursor: pointer; }
 .tile:hover { transform: rotate(0) scale(1.04); z-index: 3; }
 .tile img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .tile .cap { font-size: clamp(24px, 2.4vw, 34px); }
-.tile .cap-bot { bottom: 10px; }
 
 .lightbox { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 16px; background: rgba(0, 0, 0, .9); cursor: zoom-out; }
 .lightbox.open { display: grid; }
 .lb-inner { position: relative; width: min(92vw, 80vh, 760px); border: 6px solid var(--white); }
 .lb-inner img { width: 100%; }
 .lb-inner .cap { font-size: clamp(30px, 5vw, 54px); }
-.lb-inner .cap-bot { bottom: 12px; }
+.lb-inner img { max-height: 62vh; object-fit: cover; }
 
 /* ---------- chart ---------- */
 .chart-sec { padding: 100px 16px 120px; background: var(--white); color: var(--black); text-align: center; }
