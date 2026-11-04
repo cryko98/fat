@@ -88,19 +88,18 @@ button { font: inherit; cursor: pointer; }
 .x svg { width: 22px; height: 22px; fill: currentColor; }
 
 /* he overlaps the top of ASS a little: that is him sitting on it */
-.drop-zone { position: relative; width: 100%; max-width: 1400px; text-align: center; padding-top: calc(clamp(130px, 17vw, 240px) * .86); }
+.drop-zone { position: relative; width: 100%; max-width: 1400px; text-align: center; padding-top: calc(clamp(200px, 27vw, 390px) * .9); }
 .dropper {
   position: absolute;
   z-index: 3;
   left: 50%;
   top: 0;
-  width: clamp(130px, 17vw, 240px);
+  width: clamp(200px, 27vw, 390px);
   aspect-ratio: 1;
-  object-fit: cover;
-  object-position: 50% 15%;
-  border-radius: 50%;
-  border: 6px solid var(--white);
-  box-shadow: 0 10px 0 rgba(0, 0, 0, .5);
+  object-fit: contain;
+  object-position: 50% 100%;
+  /* white sticker outline so he pops off the banner cat */
+  filter: drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(0 12px 10px rgba(0, 0, 0, .7));
   transform: translate(-50%, -150vh);
 }
 .dropper.landed { animation: drop .7s cubic-bezier(.55, 0, 1, .45) forwards, squish .5s .7s ease-out forwards; }
