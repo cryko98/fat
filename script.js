@@ -1,6 +1,6 @@
 // ---------- config ----------
 // Put the real X profile URL and the contract address here when ready.
-const X_URL = '#';
+const X_URL = 'https://x.com/fatasspussypf';
 const CA = '';
 
 const page = document.getElementById('page');
