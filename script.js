@@ -23,6 +23,25 @@ function say(msg) {
 // ---------- he lands on the headline ----------
 const dropper = document.getElementById('dropper');
 const hAss = document.getElementById('hAss');
+const dropZone = dropper.parentElement;
+const ASS_SQUASH_X = 1.7, ASS_SQUASH_Y = .55; // keep in sync with .h-ass.sat
+const CAT_BODY = .645; // lying cat height / width in the cutout
+function fitDropper() {
+  const w = hAss.offsetWidth * ASS_SQUASH_X;
+  const h = w * CAT_BODY;
+  dropZone.style.paddingTop = Math.round(h * .62) + 'px';
+  // he lies on the squashed word, sinking in a little
+  const bottom = hAss.offsetTop + hAss.offsetHeight * (1 - ASS_SQUASH_Y) + hAss.offsetHeight * .12;
+  Object.assign(dropper.style, {
+    width: w + 'px',
+    height: h + 'px',
+    left: hAss.offsetLeft + hAss.offsetWidth / 2 - w / 2 + 'px',
+    top: bottom - h + 'px',
+  });
+}
+fitDropper();
+addEventListener('resize', fitDropper);
+document.fonts.ready.then(fitDropper);
 setTimeout(() => {
   dropper.classList.add('landed');
   setTimeout(() => { hAss.classList.add('sat'); shake(); }, 700);
