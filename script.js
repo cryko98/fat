@@ -42,10 +42,21 @@ function fitDropper() {
 fitDropper();
 addEventListener('resize', fitDropper);
 document.fonts.ready.then(fitDropper);
-setTimeout(() => {
-  dropper.classList.add('landed');
-  setTimeout(() => { hAss.classList.add('sat'); shake(); }, 700);
-}, 400);
+// drop only once he is loaded and the word is measured, and squash the
+// word exactly when the fall ends (not on a timer, slow networks broke that)
+dropper.addEventListener('animationend', (e) => {
+  if (e.animationName !== 'drop') return;
+  hAss.classList.add('sat');
+  shake();
+});
+const catImg = dropper.querySelector('img');
+Promise.all([
+  catImg.decode().catch(() => {}),
+  document.fonts.ready,
+]).then(() => {
+  fitDropper();
+  setTimeout(() => dropper.classList.add('landed'), 250);
+});
 
 // ---------- belt ----------
 const belt = document.getElementById('belt');
