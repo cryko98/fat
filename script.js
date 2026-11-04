@@ -1,7 +1,7 @@
 // ---------- config ----------
 // Put the real X profile URL and the contract address here when ready.
 const X_URL = 'https://x.com/fatasspussypf';
-const CA = '';
+const CA = '7Q3NgSm398AMJaeiKcRYjhNhAb3mRGdFc55LvV2Kpump';
 
 const page = document.getElementById('page');
 function shake() {
@@ -72,7 +72,10 @@ document.querySelectorAll('.js-x').forEach((a) => {
 });
 
 // ---------- CA ----------
-if (CA) document.getElementById('ca').textContent = CA;
+if (CA) {
+  document.getElementById('ca').textContent = CA;
+  document.getElementById('caFoot').textContent = 'CA: ' + CA;
+}
 document.getElementById('caCopy').addEventListener('click', async () => {
   if (!CA) return say('NOTHING TO COPY. HE IS SITTING ON IT.');
   try { await navigator.clipboard.writeText(CA); say('COPIED. NOW GO.'); }
