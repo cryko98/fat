@@ -118,7 +118,11 @@ document.getElementById('dietBtn').addEventListener('click', () => {
 });
 
 // ---------- meme wall ----------
+// a 4th field marks wide (16:9) images, shown uncropped
 const memes = [
+  ['17-poster', 'coming to cinemas', 'as soon as he fits through the door', true],
+  ['15-ufo', 'aliens came for a sample', 'tractor beam: not strong enough', true],
+  ['16-ship', 'they said it was unsinkable', 'then he got on board', true],
   ['01-cat-door', 'I\'ll just pop out for a sec', '3 days later'],
   ['02-scale', 'steps on scale', 'scale: I\'m out'],
   ['03-buffet', 'all you can eat?', 'say less'],
@@ -136,9 +140,9 @@ const memes = [
 ];
 const wall = document.getElementById('wall');
 const tilts = [-2, 1.5, -1, 2.5, -2.5, 1, -1.5, 2];
-memes.forEach(([file, top, bot], i) => {
+memes.forEach(([file, top, bot, isWide], i) => {
   const t = document.createElement('figure');
-  t.className = 'tile meme';
+  t.className = isWide ? 'tile meme wide' : 'tile meme';
   t.style.setProperty('--r', tilts[i % tilts.length] + 'deg');
   t.innerHTML = `<img src="assets/gallery/${file}.jpg" alt="${top} ${bot}" loading="lazy">
     <p class="cap cap-top">${top}</p><p class="cap cap-bot">${bot}</p>`;
