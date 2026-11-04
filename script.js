@@ -1,0 +1,144 @@
+// ---------- config ----------
+// Put the real X profile URL and the contract address here when ready.
+const X_URL = '#';
+const CA = '';
+
+const page = document.getElementById('page');
+function shake() {
+  page.classList.remove('shake');
+  void page.offsetWidth;
+  page.classList.add('shake');
+}
+
+// ---------- toast ----------
+const toast = document.getElementById('toast');
+let toastTimer;
+function say(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+// ---------- he lands on the headline ----------
+const dropper = document.getElementById('dropper');
+const hAss = document.getElementById('hAss');
+setTimeout(() => {
+  dropper.classList.add('landed');
+  setTimeout(() => { hAss.classList.add('sat'); shake(); }, 700);
+}, 400);
+
+// ---------- belt ----------
+const belt = document.getElementById('belt');
+const beltWords = 'FAT ASS PUSSY <b>$FAP</b> IT IS A CAT <b>$FAP</b> WIDE LOAD <b>$FAP</b> ABSOLUTE UNIT <b>$FAP</b> ';
+belt.innerHTML = beltWords.repeat(6);
+
+// ---------- X links ----------
+document.querySelectorAll('.js-x').forEach((a) => {
+  a.href = X_URL;
+  a.addEventListener('click', (e) => {
+    if (X_URL === '#') { e.preventDefault(); say('X COMING SOON. HE TYPES SLOW. FAT PAWS.'); }
+  });
+});
+
+// ---------- CA ----------
+if (CA) document.getElementById('ca').textContent = CA;
+document.getElementById('caCopy').addEventListener('click', async () => {
+  if (!CA) return say('NOTHING TO COPY. HE IS SITTING ON IT.');
+  try { await navigator.clipboard.writeText(CA); say('COPIED. NOW GO.'); }
+  catch { say('COPY FAILED. DO IT BY HAND.'); }
+});
+
+// ---------- video sound ----------
+const vid = document.getElementById('vid');
+const sound = document.getElementById('sound');
+sound.addEventListener('click', () => {
+  vid.muted = !vid.muted;
+  if (!vid.muted) vid.play();
+  sound.textContent = vid.muted ? 'TURN ON SOUND' : 'TURN OFF SOUND';
+});
+
+// ---------- make him wider ----------
+const widerCat = document.getElementById('widerCat');
+const widerMsg = document.getElementById('widerMsg');
+const widerLines = [
+  'he can take it.', 'wider.', 'WIDER.', 'ok he is thicc now', 'the frame is sweating',
+  'he is leaving the screen', 'someone call NASA', 'he can see your house from here',
+  'this is now a landscape photo', 'absolute unit achieved', 'he is still not done',
+];
+let wide = 1;
+function renderWide() {
+  widerCat.style.aspectRatio = wide;
+  widerMsg.textContent = widerLines[Math.min(Math.round((wide - 1) / 0.5), widerLines.length - 1)];
+}
+document.getElementById('widerBtn').addEventListener('click', () => {
+  wide = Math.min(wide + 0.5, 8);
+  renderWide();
+  shake();
+});
+document.getElementById('dietBtn').addEventListener('click', () => {
+  wide = Math.max(wide - 0.25, 1);
+  renderWide();
+  setTimeout(() => {
+    wide = Math.min(wide + 1, 8);
+    renderWide();
+    shake();
+    say('HE SAID NO.');
+  }, 450);
+});
+
+// ---------- meme wall ----------
+const memes = [
+  ['01-cat-door', 'I\'ll just pop out for a sec', '3 days later'],
+  ['02-scale', 'steps on scale', 'scale: I\'m out'],
+  ['03-buffet', 'all you can eat?', 'say less'],
+  ['04-couch', 'it was a 3 seater', 'now it\'s a 0 seater'],
+  ['05-sumo', 'opponent: 180 kg', 'him: yes'],
+  ['06-box', 'if I fits I sits', 'I do not fits. I sits.'],
+  ['07-elevator', 'max load: 8 people', 'or 1 fat ass pussy'],
+  ['08-beach', 'save the whale', 'guys it\'s a cat'],
+  ['09-kaiju', 'he didn\'t attack the city', 'he just sat down'],
+  ['10-treadmill', 'leg day', 'donut day'],
+  ['11-hallway', 'the hallway is closed', 'forever'],
+  ['12-weigh-station', 'sir this is a truck scale', 'and?'],
+  ['13-throne', 'bow before', 'the fat ass pussy'],
+  ['14-pool', 'cannonball', 'pool: gone'],
+];
+const wall = document.getElementById('wall');
+const tilts = [-2, 1.5, -1, 2.5, -2.5, 1, -1.5, 2];
+memes.forEach(([file, top, bot], i) => {
+  const t = document.createElement('figure');
+  t.className = 'tile meme';
+  t.style.setProperty('--r', tilts[i % tilts.length] + 'deg');
+  t.innerHTML = `<img src="assets/gallery/${file}.jpg" alt="${top} ${bot}" loading="lazy">
+    <p class="cap cap-top">${top}</p><p class="cap cap-bot">${bot}</p>`;
+  t.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(t); });
+  wall.appendChild(t);
+});
+const lightbox = document.getElementById('lightbox');
+function openLightbox(tile) {
+  lightbox.firstElementChild.innerHTML = tile.innerHTML;
+  lightbox.classList.add('open');
+}
+lightbox.addEventListener('click', (e) => { e.stopPropagation(); lightbox.classList.remove('open'); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+
+// ---------- click anywhere: more cats fall from the sky ----------
+let fallers = 0;
+document.addEventListener('click', (e) => {
+  if (e.target.closest('a, button, .tile, video, .lightbox')) return;
+  if (fallers > 25) return;
+  fallers++;
+  const c = document.createElement('img');
+  c.src = 'assets/logo.jpg';
+  c.alt = '';
+  c.className = 'faller';
+  c.style.left = (e.clientX - 45) + 'px';
+  c.style.top = '-100px';
+  c.style.setProperty('--fall', (innerHeight + 10) + 'px');
+  c.style.setProperty('--spin', (Math.random() * 120 - 60) + 'deg');
+  document.body.appendChild(c);
+  setTimeout(shake, 750);
+  setTimeout(() => c.classList.add('gone'), 1300);
+  setTimeout(() => { c.remove(); fallers--; }, 2000);
+});
